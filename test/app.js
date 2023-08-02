@@ -1,7 +1,26 @@
+// トグルメニュー
+document.addEventListener("DOMContentLoaded", function () {
+  // js-showクラスの要素を取得
+  var jsShowElement = document.getElementById("js-show");
+
+  // js-showクラスの要素をクリックしたときの処理
+  jsShowElement.addEventListener("click", function () {
+    // js-tipsクラスを持つ要素を取得
+    var jsTipsElement = document.getElementById("js-tips");
+
+    // js-tipsクラスを持つ要素のスタイルのdisplayプロパティを切り替えることで、表示を切り替える
+    if (jsTipsElement.style.display === "none") {
+      jsTipsElement.style.display = "block";
+    } else {
+      jsTipsElement.style.display = "none";
+    }
+  });
+});
+
 const quiz = [
   {
     question: "ゲーム市場、最も売れたゲーム機は次の内どれ？",
-    // tips: "ヒント: 発売日は2004年11月21日",
+    tips: "ヒント: 発売日は2004年11月21日",
     answers: [
       "スーパーファミコン",
       "プレステーション2",
@@ -12,7 +31,7 @@ const quiz = [
   },
   {
     question: "糸井重里が企画に関わった、任天堂の看板ゲームといえば？",
-    // tips: "ヒント: 主人公はネス",
+    tips: "ヒント: 主人公はネス",
     answers: [
       "MOTHER2",
       "スーパーマリオブラザーズ3",
@@ -23,13 +42,13 @@ const quiz = [
   },
   {
     question: "ファイナルファンタジーⅣの主人公の名前は？",
-    // tips: "ヒント: ラスボスの名前はゼロムス",
+    tips: "ヒント: ラスボスの名前はゼロムス",
     answers: ["フリオニール", "クラウド", "ティーダ", "セシル"],
     correct: "セシル",
   },
 ];
 
-// let tipsIndex = 0;
+let tipsIndex = 0;
 
 let quizIndex = 0;
 let score = 0;
@@ -43,6 +62,7 @@ const buttonLength = $button.length;
 // 定数の文字列をHTMLに反映させる
 const setupQuiz = () => {
   document.getElementById("js-question").textContent = quiz[quizIndex].question;
+  document.getElementById("js-tips").textContent = quiz[quizIndex].tips;
   let buttononIndex = 0;
   while (buttononIndex < buttonLength) {
     $button[buttononIndex].textContent = quiz[quizIndex].answers[buttononIndex];
@@ -50,17 +70,6 @@ const setupQuiz = () => {
   }
 };
 setupQuiz();
-
-// オリジナルヒント
-// const setuptips = () => {
-//   document.getElementById("js-tips").textContent = quiz[tipsIndex].tips;
-//   let tipsonIndex = 0;
-//   while (tipsonIndex < tipsLength) {
-//     $button[tipsonIndex].textContent = quiz[tipsIndex].answers[buttononIndex];
-//     tipsonIndex++;
-//   }
-// };
-// setuptips();
 
 const clickHandler = (e) => {
   if (quiz[quizIndex].correct === e.target.textContent) {
